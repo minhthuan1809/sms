@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Avatar, Dropdown } from 'antd';
+import { Layout, Menu, Avatar, Dropdown, Button } from 'antd';
 import { 
   SendOutlined, 
   MessageOutlined, 
@@ -7,7 +7,9 @@ import {
   LogoutOutlined,
   DashboardOutlined,
   HistoryOutlined,
-  SettingOutlined
+  SettingOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -19,6 +21,7 @@ const { Header, Sider, Content } = Layout;
 
 const DashboardLayout: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState('send');
+  const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -78,13 +81,15 @@ const DashboardLayout: React.FC = () => {
       {/* Sidebar */}
       <Sider 
         width={250} 
-        className="bg-white shadow-lg"
+        collapsed={collapsed}
+        className="bg-white shadow-lg transition-all duration-300"
         theme="light"
+        trigger={null}
       >
-        <div className="p-6">
-          <div className="flex items-center mb-8">
+        <div className={`${collapsed ? 'p-4' : 'p-6'}`}>
+          <div className={`flex items-center ${collapsed ? 'justify-center' : 'mb-8'}`}>
             <MessageOutlined className="text-2xl text-blue-600 mr-3" />
-            <h1 className="text-xl font-bold text-gray-800">SMS System</h1>
+            {!collapsed && <h1 className="text-xl font-bold text-gray-800">SMS System</h1>}
           </div>
           
           <Menu
@@ -93,6 +98,7 @@ const DashboardLayout: React.FC = () => {
             items={menuItems}
             onClick={({ key }) => setSelectedMenu(key)}
             className="border-0"
+            inlineCollapsed={collapsed}
           />
         </div>
       </Sider>
@@ -100,7 +106,13 @@ const DashboardLayout: React.FC = () => {
       <Layout>
         {/* Header */}
         <Header className="bg-white shadow-sm px-6 flex items-center justify-between">
-          <div>
+          <div className="flex items-center space-x-4">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              className="text-gray-600 hover:text-blue-600"
+            />
             <h2 className="text-lg font-semibold text-gray-800">
               {selectedMenu === 'send' && 'Gửi SMS'}
               {selectedMenu === 'history' && 'Lịch sử SMS'}

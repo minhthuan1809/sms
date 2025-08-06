@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Card, Row, Col, Select, Upload, Typography } from 'antd';
-    import { SendOutlined, UploadOutlined } from '@ant-design/icons';
+    import { SendOutlined, UploadOutlined, MessageOutlined } from '@ant-design/icons';
     import { toast } from 'sonner';
     import type { SMSForm } from '../types/index';
 import { SENDER_OPTIONS } from '../utils/constants';
@@ -54,10 +54,14 @@ const SMSSender: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <Title level={3} className="mb-0">Gửi SMS</Title>
-        <div className="text-sm text-gray-500">
-          Số tin nhắn: <span className="font-semibold text-blue-600">{messageCount}</span>
+      <div className="flex items-center justify-between bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border border-blue-100">
+        <div className="flex items-center space-x-3">
+          <SendOutlined className="text-2xl text-blue-600" />
+          <Title level={3} className="mb-0 text-gray-800">Gửi SMS</Title>
+        </div>
+        <div className="flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm">
+          <span className="text-sm text-gray-600">Số tin nhắn:</span>
+          <span className="font-bold text-blue-600 text-lg">{messageCount}</span>
         </div>
       </div>
 
@@ -69,7 +73,16 @@ const SMSSender: React.FC = () => {
       >
         <Row gutter={24}>
           <Col span={16}>
-            <Card title="Thông tin SMS" className="shadow-sm">
+            <Card 
+              title={
+                <div className="flex items-center space-x-2">
+                  <MessageOutlined className="text-blue-600" />
+                  <span>Thông tin SMS</span>
+                </div>
+              } 
+              className="shadow-lg border-0"
+              headStyle={{ borderBottom: '2px solid #e6f7ff', background: '#f8fafc' }}
+            >
               <Row gutter={16}>
                 <Col span={12}>
                   <Form.Item
@@ -124,7 +137,16 @@ const SMSSender: React.FC = () => {
           </Col>
 
           <Col span={8}>
-            <Card title="Tùy chọn" className="shadow-sm">
+            <Card 
+              title={
+                <div className="flex items-center space-x-2">
+                  <UploadOutlined className="text-green-600" />
+                  <span>Tùy chọn</span>
+                </div>
+              }
+              className="shadow-lg border-0"
+              headStyle={{ borderBottom: '2px solid #f0f9ff', background: '#f8fafc' }}
+            >
               <div className="space-y-4">
                 <div>
                   <h4 className="font-medium mb-2">Upload danh sách số điện thoại</h4>
@@ -142,12 +164,24 @@ const SMSSender: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-blue-800 mb-2">Lưu ý:</h4>
-                  <ul className="text-sm text-blue-700 space-y-1">
-                    <li>• Mỗi tin nhắn tối đa 160 ký tự</li>
-                    <li>• Số điện thoại phải đúng định dạng Việt Nam</li>
-                    <li>• Có thể gửi tối đa 1000 tin nhắn/lần</li>
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-lg border border-blue-200">
+                  <h4 className="font-medium text-blue-800 mb-3 flex items-center">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                    Lưu ý:
+                  </h4>
+                  <ul className="text-sm text-blue-700 space-y-2">
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                      Mỗi tin nhắn tối đa 160 ký tự
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                      Số điện thoại phải đúng định dạng Việt Nam
+                    </li>
+                    <li className="flex items-start">
+                      <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 mt-2 flex-shrink-0"></span>
+                      Có thể gửi tối đa 1000 tin nhắn/lần
+                    </li>
                   </ul>
                 </div>
               </div>
