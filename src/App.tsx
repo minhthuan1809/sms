@@ -1,10 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { Toaster } from 'sonner';
-import Login from './pages/Login';
-import DashboardLayout from './layouts/DashboardLayout';
-import ProtectedRoute from './routes/ProtectedRoute';
+import router from './routes';
 
 const App: React.FC = () => {
   return (
@@ -16,22 +14,7 @@ const App: React.FC = () => {
         },
       }}
     >
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route 
-              path="/dashboard" 
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout />
-                </ProtectedRoute>
-              } 
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
-      </Router>
+      <RouterProvider router={router} />
       
       <Toaster 
         position="top-right"

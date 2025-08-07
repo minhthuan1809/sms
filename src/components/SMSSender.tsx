@@ -81,7 +81,6 @@ const SMSSender: React.FC = () => {
                 </div>
               } 
               className="shadow-lg border-0"
-              headStyle={{ borderBottom: '2px solid #e6f7ff', background: '#f8fafc' }}
             >
               <Row gutter={16}>
                 <Col span={12}>
@@ -145,7 +144,6 @@ const SMSSender: React.FC = () => {
                 </div>
               }
               className="shadow-lg border-0"
-              headStyle={{ borderBottom: '2px solid #f0f9ff', background: '#f8fafc' }}
             >
               <div className="space-y-4">
                 <div>

@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Avatar, Dropdown, Button } from 'antd';
+import { Layout, Avatar, Dropdown, Button, Menu } from 'antd';
 import { 
-  SendOutlined, 
-  MessageOutlined, 
   UserOutlined, 
   LogoutOutlined,
-  DashboardOutlined,
-  HistoryOutlined,
-  SettingOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined
 } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { toast } from 'sonner';
-import SMSSender from '../components/SMSSender';
-import SMSHistory from '../components/SMSHistory';
-import SMSStats from '../components/SMSStats';
+import MenuComponent from '../components/Menu';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 const DashboardLayout: React.FC = () => {
-  const [selectedMenu, setSelectedMenu] = useState('send');
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
 
@@ -35,73 +27,16 @@ const DashboardLayout: React.FC = () => {
       <Menu.Item key="profile" icon={<UserOutlined />}>
         Hồ sơ
       </Menu.Item>
-      <Menu.Item key="settings" icon={<SettingOutlined />}>
-        Cài đặt
-      </Menu.Item>
-      <Menu.Divider />
       <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
         Đăng xuất
       </Menu.Item>
     </Menu>
   );
 
-  const menuItems = [
-    {
-      key: 'send',
-      icon: <SendOutlined />,
-      label: 'Gửi SMS',
-    },
-    {
-      key: 'history',
-      icon: <HistoryOutlined />,
-      label: 'Lịch sử',
-    },
-    {
-      key: 'stats',
-      icon: <DashboardOutlined />,
-      label: 'Thống kê',
-    },
-  ];
-
-  const renderContent = () => {
-    switch (selectedMenu) {
-      case 'send':
-        return <SMSSender />;
-      case 'history':
-        return <SMSHistory />;
-      case 'stats':
-        return <SMSStats />;
-      default:
-        return <SMSSender />;
-    }
-  };
-
   return (
     <Layout className="min-h-screen">
       {/* Sidebar */}
-      <Sider 
-        width={250} 
-        collapsed={collapsed}
-        className="bg-white shadow-lg transition-all duration-300"
-        theme="light"
-        trigger={null}
-      >
-        <div className={`${collapsed ? 'p-4' : 'p-6'}`}>
-          <div className={`flex items-center ${collapsed ? 'justify-center' : 'mb-8'}`}>
-            <MessageOutlined className="text-2xl text-blue-600 mr-3" />
-            {!collapsed && <h1 className="text-xl font-bold text-gray-800">SMS System</h1>}
-          </div>
-          
-          <Menu
-            mode="inline"
-            selectedKeys={[selectedMenu]}
-            items={menuItems}
-            onClick={({ key }) => setSelectedMenu(key)}
-            className="border-0"
-            inlineCollapsed={collapsed}
-          />
-        </div>
-      </Sider>
+      <MenuComponent />
 
       <Layout>
         {/* Header */}
@@ -114,9 +49,7 @@ const DashboardLayout: React.FC = () => {
               className="text-gray-600 hover:text-blue-600"
             />
             <h2 className="text-lg font-semibold text-gray-800">
-              {selectedMenu === 'send' && 'Gửi SMS'}
-              {selectedMenu === 'history' && 'Lịch sử SMS'}
-              {selectedMenu === 'stats' && 'Thống kê'}
+              SMS System Dashboard
             </h2>
           </div>
           
@@ -134,7 +67,7 @@ const DashboardLayout: React.FC = () => {
         {/* Main Content */}
         <Content className="p-6 bg-gray-50">
           <div className="bg-white rounded-lg shadow-sm p-6">
-            {renderContent()}
+            <Outlet />
           </div>
         </Content>
       </Layout>

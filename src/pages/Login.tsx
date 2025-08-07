@@ -47,7 +47,7 @@ const Login: React.FC = () => {
           <Title className="text-gray-800 mb-2 !text-4xl">
             SMS System
           </Title>
-          <p className="text-gray-600 !text-2xl">Đăng nhập để tiếp tục</p>
+          <p className="text-gray-600 !text-xl">Đăng nhập để tiếp tục</p>
         </div>
         
         <Form
