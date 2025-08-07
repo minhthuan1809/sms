@@ -44,10 +44,10 @@ const Login: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-2xl">
         <div className="text-center mb-8">
-          <Title level={2} className="text-gray-800 mb-2">
+          <Title className="text-gray-800 mb-2 !text-4xl">
             SMS System
           </Title>
-          <p className="text-gray-600">Đăng nhập để tiếp tục</p>
+          <p className="text-gray-600 !text-2xl">Đăng nhập để tiếp tục</p>
         </div>
         
         <Form
