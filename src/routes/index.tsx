@@ -7,9 +7,20 @@ import SMSStats from "../components/SMSStats";
 import ProtectedRoute from "./middleware/ProtectedRoute";
 import NotFound from "../components/notFound/404";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import User from "../components/User";
+import Roles from "../components/Roles";
+import Profile from "../components/Profile";
+import Templates from "../components/Templates";  
+import APISettings from "../components/APISettings";
 
 // Define route paths as constants for better maintainability
-
+const renderLayout = () => {
+  return (
+    <ProtectedRoute>
+      <DashboardLayout />
+    </ProtectedRoute>
+  )
+}
 
 const router = createBrowserRouter([
   {
@@ -22,11 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-      <ProtectedRoute>
-        <DashboardLayout />
-      </ProtectedRoute>
-    ),
+    element: renderLayout() ,  
     children: [
       {
         index: true,
@@ -43,6 +50,33 @@ const router = createBrowserRouter([
       {
         path: "stats",
         element: <SMSStats />,
+      },
+    
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+          path: "templates",
+        element: <Templates />,
+      },
+      {
+        path: "api-settings",
+          element: <APISettings />,
+        },
+    ],
+  },
+  {
+    path: "/admin", 
+    element: renderLayout(),
+    children: [
+      {
+        path: "user",
+        element: <User />,
+      },
+      {
+        path: "roles",
+        element: <Roles />,
       },
     ],
   },

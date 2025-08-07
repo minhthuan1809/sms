@@ -83,13 +83,8 @@ const MenuComponent: React.FC = () => {
           type: 'tab',
           icon: <FileTextOutlined />
         },
-        {
-          key: 'contacts',
-          label: 'Danh bạ',
-          path: '/dashboard/contacts',
-          type: 'tab',
-          icon: <ContactsOutlined />
-        }
+            
+     
       ]
     },
     {
@@ -123,16 +118,16 @@ const MenuComponent: React.FC = () => {
       type: 'group',
       children: [
         {
-          key: 'users',
+          key: 'user', 
           label: 'Quản lý người dùng',
-          path: '/dashboard/admin/users',
+          path: '/admin/user',
           type: 'tab',
           icon: <UserOutlined />
         },
         {
           key: 'roles',
           label: 'Phân quyền',
-          path: '/dashboard/admin/roles',
+          path: '/admin/roles',
           type: 'tab',
           icon: <SafetyCertificateOutlined />
         }
