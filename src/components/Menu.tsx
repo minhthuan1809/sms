@@ -39,12 +39,6 @@ const getItem = (label: React.ReactNode, key: string, icon?: React.ReactNode, ch
   };
 };
 
-const cleanPath = (path: string) => {
-  if (path.startsWith('/')) {
-    path = path.substring(1);
-  }
-  return path;
-};
 
 const MenuComponent: React.FC = () => {
   const location = useLocation();
@@ -56,7 +50,7 @@ const MenuComponent: React.FC = () => {
     {
       key: 'dashboard',
       label: 'Tổng quan',
-      path: '/dashboard',
+      path: '/',
       icon: <DashboardOutlined />,
       type: 'group'
     },
@@ -262,10 +256,10 @@ const MenuComponent: React.FC = () => {
       trigger={null}
       width={280}
       collapsedWidth={70}
-      className="min-h-screen bg-white shadow-sm border-r border-gray-100"
+      className=" bg-white shadow-sm border-r border-gray-100 min-h-screen"
     >
       {/* Header */}
-      <div className="p-6 border-b border-gray-100 bg-white relative">
+      <div className="p-2 border-b border-gray-100 bg-white relative">
         <div className="flex items-center justify-center relative z-10">
           <div className={`font-semibold text-gray-800 text-center transition-all duration-300 ${collapsed ? 'text-base' : 'text-lg'}`}>
             <span className="text-blue-600">

@@ -27,7 +27,7 @@ const Login: React.FC = () => {
         console.log('Login successful');
         toast.success('Đăng nhập thành công!');
         localStorage.setItem('isLoggedIn', 'true');
-        navigate('/dashboard');
+        navigate('/');
       } else {
         console.log('Login failed - invalid credentials');
         toast.error('Tên đăng nhập hoặc mật khẩu không đúng!');
